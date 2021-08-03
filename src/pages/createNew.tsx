@@ -1,38 +1,54 @@
-import { StaticQuery } from "gatsby"
-import React, { useState } from "react"
+import React, { useState, useRef } from "react"
 import Header from "../components/Header"
 import Lolly from "../components/Lolly"
 
 const createNew = () => {
-  const [inputColor, setInputColor] = useState({
-    flavourTop: "#4B0082",
-    flavourMiddle: "#8A2BE2",
-    flavourBottom: "#FF00FF",
+  const [flavour, setFlavour] = useState({
+    top: "#4B0082",
+    middle: "#8A2BE2",
+    bottom: "#FF00FF",
   })
+
+  const recipientName = useRef<HTMLInputElement>(null)
+  const message = useRef<HTMLTextAreaElement>(null)
+  const sender = useRef<HTMLInputElement>(null)
 
   const colorChangeHandler = (e: {
     target: { name: string; value: string }
   }) => {
-    setInputColor(st => ({ ...st, [e.target.name]: e.target.value }))
+    setFlavour(st => ({ ...st, [e.target.name]: e.target.value }))
   }
 
-  // console.log(`State inputColor: `, inputColor)
+  const submitLollyForm = () => {
+    console.log(`Clicked`)
+    if (recipientName.current !== null) {
+      // console.log("RecipientName: ", recipientName.current.value)
+    }
+    if (message.current !== null) {
+      // console.log("message: ", message.current.value)
+    }
+    if (sender.current !== null) {
+      // console.log("sender: ", sender.current.value)
+    }
+    // console.log(`flavour: `, flavour)
+  }
+
   return (
     <div className="container">
       <Header />
       <div className="create-lolly-container">
-          <Lolly
-            fillLollyTop={inputColor.flavourTop}
-            fillLollyMiddle={inputColor.flavourMiddle}
-            fillLollyBottom={inputColor.flavourBottom}
-          />
-        {/* COLOR INPUT */}
+        <Lolly
+          fillLollyTop={flavour.top}
+          fillLollyMiddle={flavour.middle}
+          fillLollyBottom={flavour.bottom}
+        />
+        {/* C O L O R   I N P U T S */}
         <div className="colorBoxes">
-          <label className="colorPickerLabel" htmlFor="flavourTop">
+          <label className="colorPickerLabel" htmlFor="top">
             <input
               onChange={colorChangeHandler}
-              value={inputColor.flavourTop}
-              name="flavourTop"
+              value={flavour.top}
+              name="top"
               type="color"
               className="colorPicker"
             />
@@ -40,29 +56,51 @@ const createNew = () => {
           <label className="colorPickerLabel" htmlFor="flavourMiddle">
             <input
               onChange={colorChangeHandler}
-              value={inputColor.flavourMiddle}
-              name="flavourMiddle"
+              value={flavour.middle}
+              name="middle"
               type="color"
               className="colorPicker"
             />
           </label>
-          <label className="colorPickerLabel" htmlFor="flavourBottom">
+          <label className="colorPickerLabel" htmlFor="bottom">
             <input
               onChange={colorChangeHandler}
-              value={inputColor.flavourBottom}
-              name="flavourBottom"
+              value={flavour.bottom}
+              name="bottom"
               type="color"
               className="colorPicker"
             />
           </label>
         </div>
+        {/* T E X T  I N P U T S */}
         <div className="lollyForm">
           <label htmlFor="recipientName">To</label>
-          <input type="text" name="recipientName" id="recipientName" />
+          <input
+            type="text"
+            name="recipientName"
+            id="recipientName"
+            ref={recipientName}
+            required
+          />
           <label htmlFor="senderMessage">Message</label>
-          <textarea rows={15} name="senderMessage" id="senderMessage" />
+          <textarea
+            rows={15}
+            name="senderMessage"
+            id="senderMessage"
+            ref={message}
+            required
+          />
           <label htmlFor="senderName">From</label>
-          <input type="text" name="senderName" id="senderName" />
+          <input
+            type="text"
+            name="senderName"
+            id="senderName"
+            ref={sender}
+            required
+          />
+          <button type="submit" onClick={submitLollyForm}>
+            Ceate Now
+          </button>
         </div>
       </div>
     </div>
