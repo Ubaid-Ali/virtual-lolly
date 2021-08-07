@@ -1,7 +1,9 @@
 import React, { useState, useRef } from "react"
 import Header from "../components/Header"
 import Lolly from "../components/Lolly"
+import { useQuery, useMutation, gql } from "@apollo/client"
 
+// M a i n   C o m p o n e n t
 const createNew = () => {
   const [flavour, setFlavour] = useState({
     top: "#4B0082",
@@ -13,29 +15,43 @@ const createNew = () => {
   const message = useRef<HTMLTextAreaElement>(null)
   const sender = useRef<HTMLInputElement>(null)
 
+  // Apollo Query
+  const APOLLO_QUERY = gql`
+  {
+    message
+  }
+`;
+
+  const { data, loading, error } = useQuery(APOLLO_QUERY)
+
   const colorChangeHandler = (e: {
     target: { name: string; value: string }
   }) => {
-    setFlavour(st => ({ ...st, [e.target.name]: e.target.value }))
+    setFlavour(state => ({ ...state, [e.target.name]: e.target.value }))
   }
 
   const submitLollyForm = () => {
     console.log(`Clicked`)
-    if (recipientName.current !== null) {
-      // console.log("RecipientName: ", recipientName.current.value)
+    if (
+      recipientName.current !== null &&
+      message.current !== null &&
+      sender.current !== null
+    ) {
+      console.log("RecipientName: ", recipientName.current.value)
+      console.log("message: ", message.current.value)
+      console.log("sender: ", sender.current.value)
+      console.log(`flavour: `, flavour)
     }
-    if (message.current !== null) {
-      // console.log("message: ", message.current.value)
-    }
-    if (sender.current !== null) {
-      // console.log("sender: ", sender.current.value)
-    }
-    // console.log(`flavour: `, flavour)
   }
+
+  console.log(`data`, data)
 
   return (
     <div className="container">
       <Header />
+      {data && <h2>Its Ok {data.hello} </h2>}
+      {loading && <h1>Loading...</h1>}
+      {error && <h2>{error.message}</h2>}
       <div className="create-lolly-container">
         <Lolly
           fillLollyTop={flavour.top}
