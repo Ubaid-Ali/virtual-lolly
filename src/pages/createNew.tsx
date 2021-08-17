@@ -3,26 +3,44 @@ import Header from "../components/Header"
 import Lolly from "../components/Lolly"
 import { useQuery, useMutation, gql } from "@apollo/client"
 
+// Apollo Query
+const APOLLO_QUERY = gql`
+  {
+    hello
+  }
+`;
+
+// Apollo Mutaion
+// const APOLLO_MUTATION = gql`
+//   mutation createNewLolly( $fillLollyTop: String!, $fillLollyMiddle: String!, $fillLollyBottom: String!, $recipientName: String!, $message: String!, $sender: String!) {
+//       createNewLolly(fillLollyTop: $fillLollyTop, fillLollyMiddle: $fillLollyMiddle, fillLollyBottom: $fillLollyBottom, recipientName: $recipientName, message: $message, sender: $sender) {
+//         message
+//       }
+//     }
+// `
+
+const apolloMutation = gql`
+  mutation createLolly($sender: String){
+    createLolly(sender: $sender) {
+      Message
+    }
+  }
+ `
+
 // M a i n   C o m p o n e n t
 const createNew = () => {
+
   const [flavour, setFlavour] = useState({
     top: "#4B0082",
     middle: "#8A2BE2",
     bottom: "#FF00FF",
   })
-
-  const recipientName = useRef<HTMLInputElement>(null)
-  const message = useRef<HTMLTextAreaElement>(null)
-  const sender = useRef<HTMLInputElement>(null)
-
-  // Apollo Query
-  const APOLLO_QUERY = gql`
-  {
-    message
-  }
-`;
+  const recipientNameRef = useRef<HTMLInputElement>(null)
+  const messageRef = useRef<HTMLTextAreaElement>(null)
+  const senderRef = useRef<HTMLInputElement>(null)
 
   const { data, loading, error } = useQuery(APOLLO_QUERY)
+  const [createLolly] = useMutation(apolloMutation)
 
   const colorChangeHandler = (e: {
     target: { name: string; value: string }
@@ -33,18 +51,38 @@ const createNew = () => {
   const submitLollyForm = () => {
     console.log(`Clicked`)
     if (
-      recipientName.current !== null &&
-      message.current !== null &&
-      sender.current !== null
+      recipientNameRef.current !== null &&
+      messageRef.current !== null &&
+      senderRef.current !== null
     ) {
-      console.log("RecipientName: ", recipientName.current.value)
-      console.log("message: ", message.current.value)
-      console.log("sender: ", sender.current.value)
-      console.log(`flavour: `, flavour)
+      try {
+        const result = createLolly({
+          variables: {
+            // fillLollyTop: flavour.top,
+            // fillLollyMiddle: flavour.middle,
+            // fillLollyBottom: flavour.bottom,
+            // recipientName: recipientNameRef.current.value,
+            //  recipientName: "John"
+            // message: messageRef.current.value,
+            // sender: senderRef.current.value
+            sender: "John from Client Side"
+          }
+        })
+
+      } catch (error) {
+        console.log(`error`, error)
+      }
+
+      // console.log(`result: `, data)
+      // console.log(`result: `, result)
+      // console.log("RecipientName: ", recipientNameRef.current.value)
+      // console.log("message: ", messageRef.current.value)
+      // console.log("sender: ", senderRef.current.value)
+      // console.log(`flavour: `, flavour)
     }
   }
 
-  console.log(`data`, data)
+  console.log(`data: `, data)
 
   return (
     <div className="container">
@@ -95,7 +133,7 @@ const createNew = () => {
             type="text"
             name="recipientName"
             id="recipientName"
-            ref={recipientName}
+            ref={recipientNameRef}
             required
           />
           <label htmlFor="senderMessage">Message</label>
@@ -103,7 +141,7 @@ const createNew = () => {
             rows={15}
             name="senderMessage"
             id="senderMessage"
-            ref={message}
+            ref={messageRef}
             required
           />
           <label htmlFor="senderName">From</label>
@@ -111,7 +149,7 @@ const createNew = () => {
             type="text"
             name="senderName"
             id="senderName"
-            ref={sender}
+            ref={senderRef}
             required
           />
           <button type="submit" onClick={submitLollyForm}>
