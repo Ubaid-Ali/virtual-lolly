@@ -40,7 +40,7 @@ const resolvers = {
   },
   Mutation: {
     makeLolly() {
-      return { UserName: { firstName: "John Corner" } }
+      return { firstName: "John Corner" }
     }
   }
 }

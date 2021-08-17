@@ -22,10 +22,8 @@ const APOLLO_QUERY = gql`
 const apolloMutation = gql`
   mutation makeLolly {
     makeLolly {
-      UserName {
         firstName
       }
-    }
   }
  `
 
