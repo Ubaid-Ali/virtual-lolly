@@ -20,9 +20,11 @@ const APOLLO_QUERY = gql`
 // `
 
 const apolloMutation = gql`
-  mutation createLolly($sender: String){
-    createLolly(sender: $sender) {
-      Message
+  mutation makeLolly {
+    makeLolly {
+      UserName {
+        firstName
+      }
     }
   }
  `
@@ -48,30 +50,25 @@ const createNew = () => {
     setFlavour(state => ({ ...state, [e.target.name]: e.target.value }))
   }
 
-  const submitLollyForm = () => {
+  const submitLollyForm = async () => {
     console.log(`Clicked`)
     if (
       recipientNameRef.current !== null &&
       messageRef.current !== null &&
       senderRef.current !== null
     ) {
-      try {
-        const result = createLolly({
-          variables: {
-            // fillLollyTop: flavour.top,
-            // fillLollyMiddle: flavour.middle,
-            // fillLollyBottom: flavour.bottom,
-            // recipientName: recipientNameRef.current.value,
-            //  recipientName: "John"
-            // message: messageRef.current.value,
-            // sender: senderRef.current.value
-            sender: "John from Client Side"
-          }
-        })
-
-      } catch (error) {
-        console.log(`error`, error)
-      }
+      const result = await createLolly({
+        variables: {
+          // fillLollyTop: flavour.top,
+          // fillLollyMiddle: flavour.middle,
+          // fillLollyBottom: flavour.bottom,
+          // recipientName: recipientNameRef.current.value,
+          //  recipientName: "John"
+          // message: messageRef.current.value,
+          // sender: senderRef.current.value
+          // sender: "John from Client Side"
+        }
+      })
 
       // console.log(`result: `, data)
       // console.log(`result: `, result)

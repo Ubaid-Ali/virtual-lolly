@@ -12,6 +12,14 @@ const typeDefs = gql`
     name: String!
     married: Boolean!
   }
+
+  type UserName {
+    firstName: String
+  }
+  type Mutation {
+    makeLolly: UserName
+  }
+  
 `
 
 const authors = [
@@ -24,12 +32,17 @@ const resolvers = {
   Query: {
     hello: () => 'Hello, world!',
     allAuthors: () => authors,
-    author: () => {},
+    author: () => { },
     authorByName: (root, args) => {
       console.log('hihhihi', args.name)
       return authors.find((author) => author.name === args.name) || 'NOTFOUND'
     },
   },
+  Mutation: {
+    makeLolly() {
+      return { UserName: { firstName: "John Corner" } }
+    }
+  }
 }
 
 const server = new ApolloServer({
