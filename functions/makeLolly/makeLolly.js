@@ -1,4 +1,8 @@
-const { ApolloServer, gql } = require('apollo-server-lambda')
+const { ApolloServer, gql } = require("apollo-server-lambda");
+const shortId = require("shortid");
+const faunadb = require("faunadb");
+const q = faunadb.query;
+require("dotenv").config()
 
 const typeDefs = gql`
   type Query {
@@ -13,43 +17,61 @@ const typeDefs = gql`
     married: Boolean!
   }
 
-  type UserName {
-    firstName: String
+  type Lolly {
+    fillLollyTop: String!
+    fillLollyMiddle: String!
+    fillLollyBottom: String!
+    recipientName: String!
+    message: String!
+    sender: String!
+    lollyPath: String!
   }
   type Mutation {
-    makeLolly: UserName
+    makeLolly(
+      fillLollyTop: String!
+      fillLollyMiddle: String!
+      fillLollyBottom: String!
+      recipientName: String!
+      message: String!
+      sender: String!
+    ): Lolly
   }
-  
-`
-
-const authors = [
-  { id: 1, name: 'Terry Pratchett', married: false },
-  { id: 2, name: 'Stephen King', married: true },
-  { id: 3, name: 'JK Rowling', married: false },
-]
-
+`;
 const resolvers = {
   Query: {
-    hello: () => 'Hello, world!',
+    hello: () => "Hello, world!",
     allAuthors: () => authors,
     author: () => { },
     authorByName: (root, args) => {
-      console.log('hihhihi', args.name)
-      return authors.find((author) => author.name === args.name) || 'NOTFOUND'
+      console.log("hihhihi", args.name);
+      return authors.find((author) => author.name === args.name) || "NOTFOUND";
     },
   },
   Mutation: {
-    makeLolly() {
-      return { firstName: "John Corner" }
-    }
-  }
-}
+    makeLolly: async (_, args) => {
+      const client = new faunadb.Client({ secret: process.env.FAUNADB_SECRET })
+      const id = shortId.generate();
+      args.lollyPath = id;
+      // Upload Data to FaunaDB
+      const result = await client.query(
+        q.Create(
+          q.Collection("lolly-collection"),
+          { data: args }
+        )
+      )
+
+      // console.log(`result==============>`, result)
+      // console.log(`result.ref.id =========>`, result.ref.id)
+      return result.data;
+    },
+  },
+};
 
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-})
+});
 
-const handler = server.createHandler()
+const handler = server.createHandler();
 
-module.exports = { handler }
+module.exports = { handler };

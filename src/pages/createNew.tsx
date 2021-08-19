@@ -11,21 +11,19 @@ const APOLLO_QUERY = gql`
 `;
 
 // Apollo Mutaion
-// const APOLLO_MUTATION = gql`
-//   mutation createNewLolly( $fillLollyTop: String!, $fillLollyMiddle: String!, $fillLollyBottom: String!, $recipientName: String!, $message: String!, $sender: String!) {
-//       createNewLolly(fillLollyTop: $fillLollyTop, fillLollyMiddle: $fillLollyMiddle, fillLollyBottom: $fillLollyBottom, recipientName: $recipientName, message: $message, sender: $sender) {
-//         message
-//       }
-//     }
-// `
-
-const apolloMutation = gql`
-  mutation makeLolly {
-    makeLolly {
-        firstName
-      }
+const APOLLO_MUTATION = gql`
+  mutation makeLolly( $fillLollyTop: String!, $fillLollyMiddle: String!, $fillLollyBottom: String!, $recipientName: String!, $message: String!, $sender: String!) {
+    makeLolly(fillLollyTop: $fillLollyTop, fillLollyMiddle: $fillLollyMiddle, fillLollyBottom: $fillLollyBottom, recipientName: $recipientName, message: $message, sender: $sender) {
+      fillLollyTop
+      fillLollyMiddle
+      fillLollyBottom
+      recipientName
+      message
+      sender
+      lollyPath
+    }
   }
- `
+`
 
 // M a i n   C o m p o n e n t
 const createNew = () => {
@@ -40,7 +38,7 @@ const createNew = () => {
   const senderRef = useRef<HTMLInputElement>(null)
 
   const { data, loading, error } = useQuery(APOLLO_QUERY)
-  const [createLolly] = useMutation(apolloMutation)
+  const [createLolly] = useMutation(APOLLO_MUTATION)
 
   const colorChangeHandler = (e: {
     target: { name: string; value: string }
@@ -57,27 +55,18 @@ const createNew = () => {
     ) {
       const result = await createLolly({
         variables: {
-          // fillLollyTop: flavour.top,
-          // fillLollyMiddle: flavour.middle,
-          // fillLollyBottom: flavour.bottom,
-          // recipientName: recipientNameRef.current.value,
-          //  recipientName: "John"
-          // message: messageRef.current.value,
-          // sender: senderRef.current.value
-          // sender: "John from Client Side"
+          fillLollyTop: flavour.top,
+          fillLollyMiddle: flavour.middle,
+          fillLollyBottom: flavour.bottom,
+          recipientName: recipientNameRef.current.value,
+          message: messageRef.current.value,
+          sender: senderRef.current.value
         }
       })
 
-      // console.log(`result: `, data)
-      // console.log(`result: `, result)
-      // console.log("RecipientName: ", recipientNameRef.current.value)
-      // console.log("message: ", messageRef.current.value)
-      // console.log("sender: ", senderRef.current.value)
-      // console.log(`flavour: `, flavour)
+      console.log(`result: `, result)
     }
   }
-
-  console.log(`data: `, data)
 
   return (
     <div className="container">
