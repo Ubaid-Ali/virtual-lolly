@@ -19,16 +19,26 @@ const ListLollies = () => {
       fillLollyMiddle: "#8A2BE2",
       fillLollyBottom: "#FF00FF",
     },
+    {
+      fillLollyTop: "#ffaef4",
+      fillLollyMiddle: "#ff9557",
+      fillLollyBottom: "#FF851B",
+    },
+    {
+      fillLollyTop: "#2f2fac",
+      fillLollyMiddle: "#e4ee39",
+      fillLollyBottom: "#00d4ff",
+    },
   ]
 
   return (
     <div className="list-lollies">
-      {displayLollies.map((l, ind) => (
+      {displayLollies.map((lolly, ind) => (
         <div key={ind}>
           <Lolly
-            fillLollyTop={l.fillLollyTop}
-            fillLollyMiddle={l.fillLollyMiddle}
-            fillLollyBottom={l.fillLollyBottom}
+            fillLollyTop={lolly.fillLollyTop}
+            fillLollyMiddle={lolly.fillLollyMiddle}
+            fillLollyBottom={lolly.fillLollyBottom}
           />
         </div>
       ))}

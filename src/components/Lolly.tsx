@@ -5,7 +5,7 @@ const Lolly = ({ fillLollyTop, fillLollyMiddle, fillLollyBottom }) => {
     //   SVG FILE
     <svg
       className="lollipop"
-      width="163px"
+      // width="px"
       height="431px"
       viewBox="0 0 163 431"
       version="1.1"

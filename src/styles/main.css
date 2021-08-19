@@ -1,14 +1,49 @@
 body {
-  background-color: bisque;
+  background-color: #21212b;
+  font-family: open-sans, Helvetica, sans-serif;
 }
 
 .container {
   text-align: center;
 }
 
+/* header start */
 .header {
   text-align: center;
 }
+
+.header-heading {
+  cursor: pointer;
+  font-family: "Dancing Script", cursive;
+  font-size: 70px;
+  text-shadow: 0 0 10px #fa73d9;
+  margin-bottom: 0;
+  display: inline-block;
+  color: #fff;
+  border-bottom-style: none;
+}
+.header-heading:hover {
+  text-shadow: 0 2px 40px #fa73d9, 1px 5px 10px #fa73d9;
+}
+
+.header-heading > * {
+  text-decoration: none;
+  color: #fff;
+}
+
+.header-paragraph {
+  margin-bottom: 4%;
+  font-size: 1.2em;
+  font-style: italic;
+  font-family: 'Times New Roman', Times, serif;
+  color: #ddd;
+  text-shadow: #fa73d9 1px 1px 3px;
+  margin-top: 1.5em;
+  margin-bottom: 3em;
+  line-height: 1.2;
+}
+
+/* header end */
 
 .list-lollies {
   display: flex;
@@ -17,7 +52,9 @@ body {
 }
 
 .lollipop {
-  height: 300px;
+  height: 20em;
+  padding: 0.3em;
+  text-shadow: 0 0 10px red;
 }
 
 .create-lolly-container {
@@ -55,4 +92,37 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.btn {
+  margin-top: 1em;
+  box-shadow: 0 0 6px #fa73d9;
+  border: 2px solid #fa73d9;
+  background-color: transparent;
+  font-size: 1em;
+  color: #fa73d9;
+  padding: 1em 2em;
+  border-radius: 4em;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.btn:hover {
+  box-shadow: 0 0 6px #fa73d9;
+  border: 2px solid #fa73d9;
+  background-color: #fa73d9;
+  color: black;
+  transition: all 0.3s;
+}
+
+.footer {
+  margin-top: 10em;
+  margin-bottom: 5em;
+  font-size: 0.9em;
+  color: #f4b1e4;
+}
+
+.footer a {
+  text-decoration: none;
+  color: #ddd;
 }
