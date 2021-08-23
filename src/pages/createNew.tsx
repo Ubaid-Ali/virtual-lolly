@@ -2,6 +2,8 @@ import React, { useState, useRef } from "react"
 import Header from "../components/Header"
 import Lolly from "../components/Lolly"
 import { useQuery, useMutation, gql } from "@apollo/client"
+import Footer from "../components/Footer"
+import { navigate } from "gatsby"
 
 // Apollo Query
 const APOLLO_QUERY = gql`
@@ -26,7 +28,7 @@ const APOLLO_MUTATION = gql`
 `
 
 // M a i n   C o m p o n e n t
-const createNew = () => {
+const createNewLolly = () => {
 
   const [flavour, setFlavour] = useState({
     top: "#4B0082",
@@ -65,17 +67,19 @@ const createNew = () => {
       })
 
       console.log(`result: `, result)
+      navigate("/showLolly")
     }
   }
 
   return (
     <div className="container">
       <Header />
-      {data && <h2>Its Ok {data.hello} </h2>}
+      {/* {data && <h2>Its Ok {data.hello} </h2>}
       {loading && <h1>Loading...</h1>}
-      {error && <h2>{error.message}</h2>}
+      {error && <h2>{error.message}</h2>} */}
       <div className="create-lolly-container">
         <Lolly
+          className="create-lolly-lollipop"
           fillLollyTop={flavour.top}
           fillLollyMiddle={flavour.middle}
           fillLollyBottom={flavour.bottom}
@@ -112,37 +116,44 @@ const createNew = () => {
         </div>
         {/* T E X T  I N P U T S */}
         <div className="lollyForm">
-          <label htmlFor="recipientName">To</label>
-          <input
-            type="text"
-            name="recipientName"
-            id="recipientName"
-            ref={recipientNameRef}
-            required
-          />
-          <label htmlFor="senderMessage">Message</label>
-          <textarea
-            rows={15}
-            name="senderMessage"
-            id="senderMessage"
-            ref={messageRef}
-            required
-          />
-          <label htmlFor="senderName">From</label>
-          <input
-            type="text"
-            name="senderName"
-            id="senderName"
-            ref={senderRef}
-            required
-          />
-          <button type="submit" onClick={submitLollyForm}>
-            Ceate Now
+          <div className="input-text-div">
+            <label htmlFor="recipientName">To
+              <input
+                type="text"
+                name="recipientName"
+                id="recipientName"
+                ref={recipientNameRef}
+                required
+              />
+            </label>
+            <label htmlFor="senderMessage">Say something nice
+              <textarea
+                rows={10}
+                name="senderMessage"
+                id="senderMessage"
+                ref={messageRef}
+                required
+              />
+            </label>
+            <label htmlFor="senderName">From
+              <input
+                type="text"
+                name="senderName"
+                id="senderName"
+                ref={senderRef}
+                required
+              />
+            </label>
+
+          </div>
+          <button type="submit" onClick={submitLollyForm} className="btn">
+            Freeze this lolly and get a link
           </button>
         </div>
       </div>
+      <Footer />
     </div>
   )
 }
 
-export default createNew
+export default createNewLolly

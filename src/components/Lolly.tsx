@@ -1,10 +1,10 @@
 import React from "react"
 
-const Lolly = ({ fillLollyTop, fillLollyMiddle, fillLollyBottom }) => {
+const Lolly = ({ className, fillLollyTop, fillLollyMiddle, fillLollyBottom }) => {
   return (
     //   SVG FILE
     <svg
-      className="lollipop"
+      className={className}
       // width="px"
       height="431px"
       viewBox="0 0 163 431"

@@ -36,6 +36,7 @@ const ListLollies = () => {
       {displayLollies.map((lolly, ind) => (
         <div key={ind}>
           <Lolly
+            className="listLollies-lollipop"
             fillLollyTop={lolly.fillLollyTop}
             fillLollyMiddle={lolly.fillLollyMiddle}
             fillLollyBottom={lolly.fillLollyBottom}
