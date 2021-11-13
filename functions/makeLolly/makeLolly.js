@@ -37,6 +37,13 @@ const typeDefs = gql`
     ): Lolly
   }
 `;
+
+const authors = [
+  {id: 001, name: "John Cena", married: true},
+  {id: 002,name: "Roman Reign",married: true},
+  {id: 003,name: "Brock Lesnar",married: true}
+];
+
 const resolvers = {
   Query: {
     hello: () => "Hello, world!",

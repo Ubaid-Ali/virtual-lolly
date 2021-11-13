@@ -12,37 +12,12 @@ const APOLLO_QUERY = gql`
   }
 `;
 
-// Apollo Mutaion
-const APOLLO_MUTATION = gql`
-  mutation makeLolly(
-    $fillLollyTop: String!
-    $fillLollyMiddle: String!
-    $fillLollyBottom: String!
-    $recipientName: String!
-    $message: String!
-    $sender: String!
-  ) {
-    makeLolly(
-      fillLollyTop: $fillLollyTop
-      fillLollyMiddle: $fillLollyMiddle
-      fillLollyBottom: $fillLollyBottom
-      recipientName: $recipientName
-      message: $message
-      sender: $sender
-    ) {
-      fillLollyTop
-      fillLollyMiddle
-      fillLollyBottom
-      recipientName
-      message
-      sender
-      lollyPath
-    }
-  }
-`;
 
 // M a i n   C o m p o n e n t
-const createNewLolly = () => {
+const createNewLolly = ({ location }) => {
+  // console.log(`props==> `, pageContext)
+  console.log(`props: `, location.state.lolly)
+
   const [flavour, setFlavour] = useState({
     top: "#4B0082",
     middle: "#8A2BE2",
@@ -54,9 +29,9 @@ const createNewLolly = () => {
   return (
     <div className="container">
       <Header />
-      {/* {data && <h2>Its Ok {data.hello} </h2>}
+      {data && <h2>Its Ok {data.hello} </h2>}
       {loading && <h1>Loading...</h1>}
-      {error && <h2>{error.message}</h2>} */}
+      {error && <h2>{error.message}</h2>}
       <div className="create-lolly-container">
         <Lolly
           className="create-lolly-lollipop"
@@ -76,9 +51,10 @@ const createNewLolly = () => {
             <span className="name">—Micheal</span>
           </div>
           <p className="showLolly-created-last-text">
-            <span>Micheal</span> made this virtual lollipop for you. You can
+            <span>Micheal</span>
+            made this virtual lollipop for you. You can
             <Link to="/createNew" className="showLolly-created-last-text-link">
-                {" "}make your own{" "}
+              {" "}make your own{" "}
             </Link>
             to send to a friend who deserve some sugary treat which won't rot
             their teeth...

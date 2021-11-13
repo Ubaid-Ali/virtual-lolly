@@ -3,6 +3,7 @@ import Header from "../components/Header"
 import Lolly from "../components/Lolly"
 import { useQuery, useMutation, gql } from "@apollo/client"
 import Footer from "../components/Footer"
+// import { navigate } from '@reach/router';
 import { navigate } from "gatsby"
 
 // Apollo Query
@@ -65,18 +66,18 @@ const createNewLolly = () => {
           sender: senderRef.current.value
         }
       })
-
-      console.log(`result: `, result)
-      navigate("/showLolly")
+      console.log(`Data Document Created in faunaDB Sucessfully!`)
+      // navigate(`showLolly?${result.data.makeLolly.lollyPath}`);
+      // navigate(`/showLolly/`, { state: { lolly: result.data.makeLolly }, replace: true })
     }
   }
 
   return (
     <div className="container">
       <Header />
-      {/* {data && <h2>Its Ok {data.hello} </h2>}
+      {data && <h2>Its Ok {data.hello} </h2>}
       {loading && <h1>Loading...</h1>}
-      {error && <h2>{error.message}</h2>} */}
+      {error && <h2>{error.message}</h2>}
       <div className="create-lolly-container">
         <Lolly
           className="create-lolly-lollipop"
