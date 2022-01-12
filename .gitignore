@@ -71,3 +71,6 @@ yarn-error.log
 
 # Local Netlify folder
 .netlify
+# @netlify/plugin-gatsby ignores start
+functions/gatsby
+# @netlify/plugin-gatsby ignores end

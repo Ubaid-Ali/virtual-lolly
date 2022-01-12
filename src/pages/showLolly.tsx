@@ -16,7 +16,7 @@ const APOLLO_QUERY = gql`
 // M a i n   C o m p o n e n t
 const createNewLolly = ({ location }) => {
   // console.log(`props==> `, pageContext)
-  console.log(`props: `, location.state.lolly)
+  // console.log(`props: `, location.state.lolly)
 
   const [flavour, setFlavour] = useState({
     top: "#4B0082",

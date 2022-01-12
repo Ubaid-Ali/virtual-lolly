@@ -1,20 +1,14 @@
-/**
- * Configure your Gatsby site with this file.
- *
- * See: https://www.gatsbyjs.com/docs/gatsby-config/
- */
-
-
 module.exports = {
   /* Your site config here */
   plugins: [
     {
       resolve: "gatsby-source-graphql",
       options: {
-        typeName: "Authors",
-        fieldName: "allAuthors",
-        url: `https://trusting-turing-8cd474.netlify.app/.netlify/functions/makeLolly`,
-        refetchInterval: 10 // Refresh every 60 seconds for new data
+        typeName: "author",
+        fieldName: "author",
+        url:"http://localhost:8888/.netlify/functions/makeLolly",
+        // url: `https://trusting-turing-8cd474.netlify.app/.netlify/functions/makeLolly`,
+        // refetchInterval: 10 // Refresh every 60 seconds for new data
       }
     },
     {

@@ -70,6 +70,8 @@ const createNewLolly = () => {
       // navigate(`showLolly?${result.data.makeLolly.lollyPath}`);
       // navigate(`/showLolly/`, { state: { lolly: result.data.makeLolly }, replace: true })
     }
+    console.log(`Please Fill the form completely`)
+
   }
 
   return (

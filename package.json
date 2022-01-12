@@ -16,25 +16,24 @@
   "dependencies": {
     "@apollo/client": "^3.4.4",
     "@types/react": "^17.0.19",
-    "apollo-server-lambda": "^2.25.2",
+    "apollo-server-lambda": "^2.25.3",
     "cross-fetch": "^3.1.4",
     "dotenv": "^8.6.0",
-    "faunadb": "^4.3.0",
+    "faunadb": "^4.4.1",
     "gatsby": "^3.12.1",
     "gatsby-plugin-google-fonts": "^1.0.1",
-    "gatsby-plugin-react-svg": "^3.0.1",
-    "gatsby-source-graphql": "^3.12.0",
-    "graphql": "^15.7.2",
+    "gatsby-plugin-react-svg": "^3.1.0",
+    "gatsby-source-graphql": "^3.14.0",
+    "graphql": "^15.8.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "shortid": "^2.2.16"
   },
   "resolutions": {
-    "graphql": "^15.7.2"
+    "graphql": "15.8.0"
   },
   "devDependencies": {
     "@types/shortid": "^0.0.29",
-    "netlify-cli": "^6.8.0",
     "prettier": "2.3.2"
   },
   "repository": {
