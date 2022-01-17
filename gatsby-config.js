@@ -6,7 +6,7 @@ module.exports = {
     //   options: {
     //     typeName: "author",
     //     fieldName: "author",
-    //     url:"http://localhost:8888/.netlify/functions/makeLolly",
+    //     url:"/.netlify/functions/makeLolly",
     //     // url: `https://trusting-turing-8cd474.netlify.app/.netlify/functions/makeLolly`,
     //     // refetchInterval: 10 // Refresh every 60 seconds for new data
     //   }
