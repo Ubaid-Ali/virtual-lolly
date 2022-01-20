@@ -26,7 +26,8 @@
     "graphql-tag": "^2.11.0",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
-    "shortid": "^2.2.16"
+    "shortid": "^2.2.16",
+    "apollo-server-lambda": "^2.18.2"
   },
   "devDependencies": {
     "prettier": "^2.5.1"

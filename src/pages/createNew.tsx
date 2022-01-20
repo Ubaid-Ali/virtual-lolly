@@ -50,7 +50,7 @@ const createNewLolly = () => {
   }
 
   const submitLollyForm = async () => {
-    console.log(`Clicked`)
+    console.log(`submitLollyForm Invoked`)
     if (
       recipientNameRef.current !== null &&
       messageRef.current !== null &&
@@ -71,7 +71,6 @@ const createNewLolly = () => {
       // navigate(`/showLolly/`, { state: { lolly: result.data.makeLolly }, replace: true })
     }
     console.log(`Please Fill the form completely`)
-
   }
 
   return (
