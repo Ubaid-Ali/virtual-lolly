@@ -6,8 +6,7 @@ module.exports = {
     //   options: {
     //     typeName: "author",
     //     fieldName: "author",
-    //     url:"/.netlify/functions/makeLolly",
-    //     // url: `https://trusting-turing-8cd474.netlify.app/.netlify/functions/makeLolly`,
+    //     url:`${process.env.URL}/.netlify/functions/makeLolly`,
     //     // refetchInterval: 10 // Refresh every 60 seconds for new data
     //   }
     // },
@@ -18,10 +17,10 @@ module.exports = {
           `Dancing Script`,
           `Acme`,
           `Satisfy`,
-          `source sans pro\:300,400,400i,700` // you can also specify font weights and styles
+          `source sans pro\:300,400,400i,700`, // you can also specify font weights and styles
         ],
-        display: 'swap'
-      }
-    }
+        display: "swap",
+      },
+    },
   ],
 }
