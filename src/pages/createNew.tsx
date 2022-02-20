@@ -23,7 +23,6 @@ const APOLLO_MUTATION = gql`
       recipientName
       message
       sender
-      lollyPath
     }
   }
 `
@@ -36,9 +35,9 @@ const createNewLolly = () => {
     middle: "#8A2BE2",
     bottom: "#FF00FF",
   })
-  const recipientNameRef = useRef<HTMLInputElement>(null)
-  const messageRef = useRef<HTMLTextAreaElement>(null)
-  const senderRef = useRef<HTMLInputElement>(null)
+  const recipientNameRef = useRef<HTMLInputElement>()
+  const messageRef = useRef<HTMLTextAreaElement>()
+  const senderRef = useRef<HTMLInputElement>()
 
   const { data, loading, error } = useQuery(APOLLO_QUERY)
   const [createLolly] = useMutation(APOLLO_MUTATION)
@@ -52,9 +51,9 @@ const createNewLolly = () => {
   const submitLollyForm = async () => {
     console.log(`submitLollyForm Invoked`)
     if (
-      recipientNameRef.current !== null &&
-      messageRef.current !== null &&
-      senderRef.current !== null
+      recipientNameRef.current.value &&
+      messageRef.current.value &&
+      senderRef.current.value
     ) {
       const result = await createLolly({
         variables: {
@@ -67,12 +66,18 @@ const createNewLolly = () => {
         }
       })
       console.log(`Data Document Created in faunaDB Sucessfully!`)
+      alert("Data Document Created in faunaDB Sucessfully!")
       // navigate(`showLolly?${result.data.makeLolly.lollyPath}`);
       // navigate(`/showLolly/`, { state: { lolly: result.data.makeLolly }, replace: true })
+      recipientNameRef.current.value = ""
+      messageRef.current.value = ""
+      senderRef.current.value = ""
+    } else {
+      console.log(`Please Fill the form completely`)
+      alert("Please Fill the form completely")
     }
-    console.log(`Please Fill the form completely`)
   }
-
+  console.log('recipientNameRef', recipientNameRef?.current?.value)
   return (
     <div className="container">
       <Header />
