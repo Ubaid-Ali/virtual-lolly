@@ -7,14 +7,6 @@ require("dotenv").config()
 const typeDefs = gql`
   type Query {
     hello: String
-    allAuthors: [author!]
-    author(id: Int): author
-    authorByName(name: String!): author
-  }
-  type author {
-    id: ID
-    name: String
-    married: Boolean
   }
 
   type Lolly {
@@ -26,6 +18,7 @@ const typeDefs = gql`
     sender: String
     lollyPath: String
   }
+  
   type Mutation {
     makeLolly(
       fillLollyTop: String!
@@ -47,12 +40,6 @@ const authors = [
 const resolvers = {
   Query: {
     hello: () => "Hello, world!",
-    allAuthors: () => authors,
-    author: () => authors[2],
-    authorByName: (root, args) => {
-      console.log("hihhihi", args.name)
-      return authors.find(author => author.name === args.name) || "NOTFOUND"
-    },
   },
   Mutation: {
     makeLolly: async (_, args) => {
