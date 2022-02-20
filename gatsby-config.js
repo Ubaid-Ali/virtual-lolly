@@ -1,21 +1,15 @@
-const path = require(`path`)
-
 module.exports = {
   /* Your site config here */
   plugins: [
-    {
-      resolve: "gatsby-source-graphql",
-      options: {
-        // Arbitrary name for the remote schema Query type
-        typeName: "Lolly",
-        // Field under which the remote schema will be accessible. You'll use this in your Gatsby query
-        fieldName: "lollies",
-        // Url to query from
-        url: "https://virtual-lolly-u.netlify.app/.netlify/functions/hello",
-        // url: "http://localhost:8888/.netlify/functions/hello",
-        refetchInterval: 60, // Refresh every 60 seconds for new data
-      },
-    },
+    // {
+    //   resolve: "gatsby-source-graphql",
+    //   options: {
+    //     typeName: "author",
+    //     fieldName: "author",
+    //     url:`${process.env.URL}/.netlify/functions/makeLolly`,
+    //     // refetchInterval: 10 // Refresh every 60 seconds for new data
+    //   }
+    // },
     {
       resolve: `gatsby-plugin-google-fonts`,
       options: {
