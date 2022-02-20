@@ -16,18 +16,19 @@
   "dependencies": {
     "@apollo/client": "^3.2.5",
     "apollo-server-lambda": "^2.25.3",
-    "cross-fetch": "^3.0.6",
+    "cross-fetch": "^3.1.5",
     "dotenv": "^8.2.0",
     "env": "0.0.2",
     "faunadb": "^4.5.2",
-    "gatsby": "4.5.3",
+    "gatsby": "^4.7.2",
     "gatsby-link": "^4.5.0",
     "gatsby-plugin-google-fonts": "^1.0.1",
     "gatsby-react-router-scroll": "^5.5.0",
+    "gatsby-source-graphql": "^4.7.0",
     "graphql": "^15.8.0",
     "graphql-tag": "^2.11.0",
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
     "shortid": "^2.2.16"
   },
   "devDependencies": {
