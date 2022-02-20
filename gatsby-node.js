@@ -1,19 +1,16 @@
-const path = require("path");
+const path = require("path")
 
-exports.createPages = async ({ graphql, actions }) => {
-  // const { createPage } = actions;
-  // const { data } = await graphql(`
-  //   query author {
-  //     author {
-  //       id
-  //       name
-  //       married
-  //     }
-  //   }
-  // `);
-  // data
-  //   ? console.log(`response.data ================================== `, data)
-  //   : console.log(`response.data ================================== FAILED TO DATA IN GATSBY-NODE.JS`);
+exports.createPages = async ({ actions, graphql }) => {
+  const { createPage } = actions
+  const { response } = await graphql(`
+    query {
+      lollies {
+        fillLollyTop
+        fillLollyMiddle
+        fillLollyBottom
+      }
+    }
+  `)
 
   // response.data.allContentfulBlogPost.edges.forEach(edge => {
   //     createPage({
@@ -24,4 +21,12 @@ exports.createPages = async ({ graphql, actions }) => {
   //         },
   //     })
   // })
-};
+  // data ?
+  console.log(
+    `response.data ================================== `,
+    response.data
+  )
+  //   : console.log(
+  //       `response.data ================================== FAILED TO DATA IN GATSBY-NODE.JS`
+  //     )
+}
