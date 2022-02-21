@@ -32,6 +32,7 @@
     "shortid": "^2.2.16"
   },
   "devDependencies": {
+    "netlify-cli": "^9.6.6",
     "prettier": "^2.5.1"
   },
   "repository": {
