@@ -1,15 +1,16 @@
 module.exports = {
   /* Your site config here */
   plugins: [
-    // {
-    //   resolve: "gatsby-source-graphql",
-    //   options: {
-    //     typeName: "author",
-    //     fieldName: "author",
-    //     url:`${process.env.URL}/.netlify/functions/makeLolly`,
-    //     // refetchInterval: 10 // Refresh every 60 seconds for new data
-    //   }
-    // },
+    {
+      resolve: "gatsby-source-graphql",
+      options: {
+        typeName: "Lolly",
+        fieldName: "AllLollies",
+        url: "https://virtual-lolly-u.netlify.app/.netlify/functions/hello",
+        // url:`${process.env.URL}/.netlify/functions/makeLolly`,
+        refetchInterval: 60 // Refresh every 60 seconds for new data
+      }
+    },
     {
       resolve: `gatsby-plugin-google-fonts`,
       options: {
