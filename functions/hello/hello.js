@@ -58,8 +58,11 @@ const AllAuthors = {
 const resolvers = {
   Query: {
     lollies: async () => {
-      if (!client) return console.log("CLIENT NOT CONNECTED")
-      if (client) console.log("CLIENT CONNECTED SUCCESSFULLY!")
+      if (!client) {
+        return console.log("DATABASE NOT CONNECTED")
+      } else {
+        console.log("DATABASE CONNECTED SUCCESSFULLY!")
+      }
       try {
         const result = await client.query(
           q.Map(
@@ -72,13 +75,13 @@ const resolvers = {
         console.log("lollies", lollies)
         return lollies
       } catch (error) {
-        "Error: [%s] %s: %s", console.log("error while get all lollies", error)
+        console.log("Error: [%s] %s: %s, error while get all lollies ", error)
       }
     },
     authorArray: () => AllAuthors,
     hello: () => "Hello, world!",
     author: () => {
-      authors[0]
+      return authors[0]
     },
     authorByName: (root, args) => {
       console.log("hihhihi", args.name)
