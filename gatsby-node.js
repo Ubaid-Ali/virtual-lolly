@@ -1,9 +1,10 @@
 const path = require("path")
+// const util = require("util") // it helps to console.log the data.
 
 exports.createPages = async ({ actions, graphql }) => {
   const { createPage } = actions
   const { data } = await graphql(`
-    query myQuery{
+    query myQuery {
       AllLollies {
         lollies {
           fillLollyTop
@@ -18,18 +19,19 @@ exports.createPages = async ({ actions, graphql }) => {
     }
   `)
 
-  // response.data.allContentfulBlogPost.edges.forEach(edge => {
-  //     createPage({
-  //         path: `/blog/${edge.node.slug}`,
-  //         component: path.resolve("./src/templates/blog-post.js"),
-  //         context: {
-  //             slug: edge.node.slug,
-  //         },
-  //     })
-  // })
-  // data ?
-  console.log(`response ================================== `, data)
-  //   : console.log(
-  //       `response.data ================================== FAILED TO DATA IN GATSBY-NODE.JS`
-  //     )
+  data
+    ? console.log(`===SUCCESS to get the data in "gatsby-node.js" file===`)
+    : console.log(`===FAILED to get the data in "gatsby-node.js" file===`)
+
+  data.AllLollies.lollies.forEach(lolly => {
+      createPage({
+          path: `/lollies/${lolly.lollyPath}`,
+          component: path.resolve("./src/templates/dynamic_Lolly.tsx"),
+          context: {
+              slug: lolly.lollyPath,
+          },
+      })
+  })
+
+  // console.log("data using util ===========\n", util.inspect(data, {showHidden: false, depth: null, colors: true}))
 }
