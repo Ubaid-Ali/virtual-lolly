@@ -1,46 +1,66 @@
-import React, { useState } from "react";
+import React from "react";
 import Header from "../components/Header";
 import Lolly from "../components/Lolly";
 import Footer from "../components/Footer";
-import { graphql, Link } from "gatsby";
+import { Link } from "gatsby";
+import { useQuery } from "@apollo/client";
+import gql from "graphql-tag";
 
 
-const Dynamic_Lolly = ( props) => {
-  console.log('props', props)
-  // console.log('pageContext', pageContext)
-  // console.log(`props: `, location.state.lolly)
+export const query = gql`
+  query myQuery($lollyPath: String!){
+    getLollyUsingPath(lollyPath: $lollyPath){
+      fillLollyTop
+      fillLollyMiddle
+      fillLollyBottom
+      message
+      sender
+      recipientName
+      lollyPath
+    }
+  }
+`
 
-  const [flavour, setFlavour] = useState({
-    top: "#4B0082",
-    middle: "#8A2BE2",
-    bottom: "#FF00FF",
-  });
+const Dynamic_Lolly = ({ pageContext: { lollyPath } }) => {
 
+  const { data, loading, error } = useQuery(query, {
+    variables: { lollyPath: lollyPath },
+  })
 
-  // console.log(data?.lollies)
+  const {
+    fillLollyTop,
+    fillLollyMiddle,
+    fillLollyBottom,
+    message,
+    sender,
+    recipientName
+  } = data?.getLollyUsingPath || {};
+
+  if (error) return <h3>{error}</h3>
+  if (loading) return <h3>Please Wait..</h3>
   return (
     <div className="container">
       <Header />
       <div className="create-lolly-container">
         <Lolly
           className="create-lolly-lollipop"
-          fillLollyTop={flavour.top}
-          fillLollyMiddle={flavour.middle}
-          fillLollyBottom={flavour.bottom}
+          fillLollyTop={fillLollyTop}
+          fillLollyMiddle={fillLollyMiddle}
+          fillLollyBottom={fillLollyBottom}
         />
         {/*  */}
         <div className="lollyForm">
           <p className="created-top-text">
             Your lolly is freezing. Share it with this link:
           </p>
-          <p className="created-link">http://localhost:8888/showLolly/</p>
+          <p className="created-link">https://virtual-lolly-fullstack.netlify.app/lollies/{lollyPath}</p>
           <div className="showLolly-created-details">
-            <span className="name">Carter</span>
-            <span>Hey this is for you!</span>
-            <span className="name">—Micheal</span>
+            <span className="name">{recipientName}</span>
+            <span>{message}</span>
+            <span className="name">--{sender}</span>
           </div>
           <p className="showLolly-created-last-text">
-            <span>Micheal</span>
+            <span>{`${sender} `}</span>
             made this virtual lollipop for you. You can
             <Link to="/createNew" className="showLolly-created-last-text-link">
               {" "}make your own{" "}
@@ -56,20 +76,5 @@ const Dynamic_Lolly = ( props) => {
 };
 
 
-export const query = graphql`
-  {
-    AllLollies {
-      lollies {
-        fillLollyBottom
-        fillLollyMiddle
-        fillLollyTop
-        message
-        recipientName
-        sender
-        lollyPath
-      }
-    }
-  }
-`
 
 export default Dynamic_Lolly;
