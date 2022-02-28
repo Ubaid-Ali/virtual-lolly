@@ -3,8 +3,7 @@ import Header from "../components/Header"
 import Lolly from "../components/Lolly"
 import { useQuery, useMutation, gql } from "@apollo/client"
 import Footer from "../components/Footer"
-// import { navigate } from '@reach/router';
-import { navigate } from "gatsby"
+// import { navigate } from "gatsby"
 
 // Apollo Query
 const APOLLO_QUERY = gql`
@@ -49,7 +48,7 @@ const createNewLolly = () => {
   }
 
   const submitLollyForm = async () => {
-    console.log(`submitLollyForm Invoked`)
+    console.log(`submitting LollyForm`)
     if (
       recipientNameRef.current.value &&
       messageRef.current.value &&
@@ -67,6 +66,7 @@ const createNewLolly = () => {
       })
       console.log(`Data Document Created in faunaDB Sucessfully!`)
       alert("Data Document Created in faunaDB Sucessfully!")
+      console.log('result', result)
       // navigate(`showLolly?${result.data.makeLolly.lollyPath}`);
       // navigate(`/showLolly/`, { state: { lolly: result.data.makeLolly }, replace: true })
       recipientNameRef.current.value = ""
@@ -77,11 +77,10 @@ const createNewLolly = () => {
       alert("Please Fill the form completely")
     }
   }
-  console.log('recipientNameRef', recipientNameRef?.current?.value)
+  // console.log('recipientNameRef', recipientNameRef?.current?.value)
   return (
     <div className="container">
       <Header />
-      {data && <h2>Its Ok {data.hello} </h2>}
       {loading && <h1>Loading...</h1>}
       {error && <h2>{error.message}</h2>}
       <div className="create-lolly-container">
@@ -131,6 +130,7 @@ const createNewLolly = () => {
                 id="recipientName"
                 ref={recipientNameRef}
                 required
+                placeholder="A lolly for..."
               />
             </label>
             <label htmlFor="senderMessage">Say something nice
@@ -149,6 +149,7 @@ const createNewLolly = () => {
                 id="senderName"
                 ref={senderRef}
                 required
+                placeholder="from your fried..."
               />
             </label>
 
