@@ -15,6 +15,7 @@ const typeDefs = gql`
     authorByName(name: String!): Author
     authorArray: AllAuthors
     lollies: [Lolly]
+    getLollyUsingPath(lollyPath: String!): Lolly
   }
   type Lolly {
     fillLollyTop: String
@@ -55,15 +56,28 @@ const AllAuthors = {
   authors: authors,
 }
 
+const dummylolly = {
+  fillLollyTop: "#4B0082",
+  fillLollyMiddle: "#8A2BE2",
+  fillLollyBottom: "#FF00FF",
+  recipientName: "recipient dummy",
+  message: "dummy message",
+  sender: "dummy Lolly",
+  lollyPath: "HZEwe1eTSdummyPath",
+}
+
 const resolvers = {
   Query: {
     lollies: async () => {
-      if (!client) {
-        return console.log("DATABASE NOT CONNECTED")
-      } else {
-        console.log("DATABASE CONNECTED SUCCESSFULLY!")
+      if (client) {
+        console.log("===database connetion success===")
       }
+      if (!client) {
+        console.log("===cannot connect to database!===")
+      }
+
       try {
+        // get data from faunadb
         const result = await client.query(
           q.Map(
             q.Paginate(q.Documents(q.Collection("lolly-collection"))),
@@ -72,12 +86,29 @@ const resolvers = {
         )
 
         const lollies = result.data.map(lolly => lolly.data)
-        console.log("lollies", lollies)
+        // console.log("lollies", lollies)
         return lollies
       } catch (error) {
         console.log("Error: [%s] %s: %s, error while get all lollies ", error)
       }
     },
+    getLollyUsingPath: async (_, { lollyPath }) => {
+      // P A T H
+      console.log(`LollyPath is ==>`, lollyPath)
+      try {
+        const result = await client.query(
+          q.Get(q.Match(q.Index("lolly_path_index"), lollyPath))
+        )
+
+        console.log(`getLollyUsingPath ====>`, result.data)
+        return result.data
+      } catch (error) {
+        console.log("error while get Lolly by getLollyUsingPath", error.message)
+      }
+
+      return error.message
+    },
+    //
     authorArray: () => AllAuthors,
     hello: () => "Hello, world!",
     author: () => {
@@ -96,7 +127,6 @@ const resolvers = {
       const result = await client.query(
         q.Create(q.Collection("lolly-collection"), { data: args })
       )
-      // console.log(`result==============>`, result)
       // console.log(`result.ref.id =========>`, result.ref.id)
       return result.data
     },
