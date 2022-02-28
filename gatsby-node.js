@@ -23,12 +23,12 @@ exports.createPages = async ({ actions, graphql }) => {
     ? console.log(`===SUCCESS to get the data in "gatsby-node.js" file===`)
     : console.log(`===FAILED to get the data in "gatsby-node.js" file===`)
 
-  data.AllLollies.lollies.forEach(lolly => {
+  data.AllLollies.lollies.forEach(({lollyPath}) => {
       createPage({
-          path: `/lollies/${lolly.lollyPath}`,
+          path: `lollies/${lollyPath}`,
           component: path.resolve("./src/templates/dynamic_Lolly.tsx"),
           context: {
-              slug: lolly.lollyPath,
+              lollyPath: lollyPath,
           },
       })
   })
