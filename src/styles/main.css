@@ -15,7 +15,8 @@ body {
 .header-heading {
   cursor: pointer;
   font-family: "Dancing Script", cursive;
-  font-size: 70px;
+  font-style: italic;
+  font-size: 80px;
   text-shadow: 0 0 10px #fa73d9;
   margin-bottom: 0;
   display: inline-block;
@@ -23,7 +24,7 @@ body {
   border-bottom-style: none;
 }
 .header-heading:hover {
-  text-shadow: 0 2px 40px #fa73d9, 1px 5px 10px #fa73d9;
+  text-shadow: 0 2px 40px #fa73d9, 1px 3px 10px #fa73d9;
 }
 
 .header-heading > * {
@@ -52,7 +53,7 @@ body {
 
 .listLollies-lollipop {
   height: 20em;
-  margin: 0 0.3em;
+  margin: 0 0.7em;
 }
 
 .create-lolly-lollipop {
@@ -117,7 +118,6 @@ label {
 
 input[type="text"],
 textarea {
-  font-size: 1.1em;
   width: 100%;
   padding: 0.4em 0.2em;
   margin: 0.6em 0;
@@ -126,9 +126,15 @@ textarea {
   background-color: #222;
   box-shadow: 0 0 6px #fa73d9;
 }
+input[type="text"] {
+  font-size: 1.1em;
+}
+textarea {
+  font-size: 1.3em;
+}
 
 .btn {
-  margin-top: 1em;
+  margin-top: 2em;
   box-shadow: 0 0 6px #fa73d9;
   border: 2px solid #fa73d9;
   background-color: transparent;
@@ -162,7 +168,8 @@ textarea {
   text-shadow: 0 0 1px #fa73d9;
   padding: 1.2em;
   /* border-radius: 4px; */
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Open Sans",
+    "Helvetica Neue", sans-serif;
   font-size: large;
 }
 
