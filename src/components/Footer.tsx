@@ -7,6 +7,7 @@ const Footer = () => {
         Virtual Lolly using Gatsby, Netlify, Netlify serverless functions and
         FaunaDB
         <br />
+        <br />
         Read more about{" "}
         <a href="https://www.netlify.com/products/functions/">
           Netlify Serverless functions
