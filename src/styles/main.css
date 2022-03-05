@@ -201,6 +201,13 @@ textarea {
   margin-bottom: 5%;
 }
 
+.loading {
+  color: #fa73d9;
+  text-shadow: 0 0 1px #fa73d9;
+  padding: 1.2em;
+  text-align: center;
+}
+
 .showLolly-created-last-text {
   color: #777777;
   font-weight: 500;
@@ -213,10 +220,11 @@ textarea {
 }
 
 /* f o o t e r */
-.footer {
-  margin-top: 10em;
+.footer, .notFound_404 {
+  margin-top: 5em;
   margin-bottom: 5em;
   font-size: 0.9em;
+  font-weight: bold;
   color: #f4b1e4;
 }
 

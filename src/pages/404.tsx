@@ -3,10 +3,13 @@ import React from "react"
 
 const NotFound404 = () => {
   return (
-    <div style={{ textAlign: "center" }}>
+    <div className="notFound_404" style={{ textAlign: "center" }}>
       Sorry Page Not Found!
       <div>
-        <button onClick={() => navigate("/")}>
+        <button
+         onClick={() => navigate("/")}
+         className="btn"
+         >
           Back to Home
         </button>
       </div>
