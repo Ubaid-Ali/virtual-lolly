@@ -5,7 +5,7 @@ import Footer from "../components/Footer";
 import { Link } from "gatsby";
 import { useQuery } from "@apollo/client";
 import gql from "graphql-tag";
-
+import { navigate } from "gatsby";
 
 export const query = gql`
   query myQuery($lollyPath: String!){
@@ -21,10 +21,26 @@ export const query = gql`
   }
 `
 
-const Dynamic_Lolly = ({ pageContext: { lollyPath } }) => {
+interface DynamicLollyProps {
+  // coming from gatsby-node.js Build time page
+  pageContext: {
+    lollyPath: string | null;
+  };
+  // run time page
+  lollyPath?: string;
+}
 
+const DynamicLolly = (props: DynamicLollyProps) => {
+
+  if (props.pageContext?.lollyPath) {
+    console.log('Build time Page, Static Page')
+  } else if (props.lollyPath) {
+    console.log('Client side Dynamic Page')
+  }
+
+  const _lollyPath = props.pageContext?.lollyPath || props.lollyPath;
   const { data, loading, error } = useQuery(query, {
-    variables: { lollyPath: lollyPath },
+    variables: { lollyPath: _lollyPath },
   })
 
   const {
@@ -36,8 +52,12 @@ const Dynamic_Lolly = ({ pageContext: { lollyPath } }) => {
     recipientName
   } = data?.getLollyUsingPath || {};
 
-  if (error) return <h3>{error}</h3>
-  if (loading) return <h3>Please Wait..</h3>
+  if (error) {
+    console.log('error', error.message)
+    navigate("/404")
+    return null
+  }
+  if (loading) return <h3 className="loading" >Please Wait..</h3>
   return (
     <div className="container">
       <Header />
@@ -53,7 +73,7 @@ const Dynamic_Lolly = ({ pageContext: { lollyPath } }) => {
           <p className="created-top-text">
             Your lolly is freezing. Share it with this link:
           </p>
-          <p className="created-link">https://virtual-lolly-fullstack.netlify.app/lollies/{lollyPath}</p>
+          <p className="created-link">https://virtual-lolly-fullstack.netlify.app/lollies/{_lollyPath}</p>
           <div className="showLolly-created-details">
             <span className="name">{recipientName}</span>
             <span>{message}</span>
@@ -77,4 +97,4 @@ const Dynamic_Lolly = ({ pageContext: { lollyPath } }) => {
 
 
 
-export default Dynamic_Lolly;
+export default DynamicLolly;

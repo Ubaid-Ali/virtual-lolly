@@ -3,7 +3,7 @@ import Header from "../components/Header"
 import Lolly from "../components/Lolly"
 import { useQuery, useMutation, gql } from "@apollo/client"
 import Footer from "../components/Footer"
-// import { navigate } from "gatsby"
+import { navigate } from "gatsby"
 
 // Apollo Query
 const APOLLO_QUERY = gql`
@@ -16,12 +16,7 @@ const APOLLO_QUERY = gql`
 const APOLLO_MUTATION = gql`
   mutation makeLolly( $fillLollyTop: String!, $fillLollyMiddle: String!, $fillLollyBottom: String!, $recipientName: String!, $message: String!, $sender: String!) {
     makeLolly(fillLollyTop: $fillLollyTop, fillLollyMiddle: $fillLollyMiddle, fillLollyBottom: $fillLollyBottom, recipientName: $recipientName, message: $message, sender: $sender) {
-      fillLollyTop
-      fillLollyMiddle
-      fillLollyBottom
-      recipientName
-      message
-      sender
+      lollyPath
     }
   }
 `
@@ -54,7 +49,7 @@ const createNewLolly = () => {
       messageRef.current.value &&
       senderRef.current.value
     ) {
-      const result = await createLolly({
+      const { data } = await createLolly({
         variables: {
           fillLollyTop: flavour.top,
           fillLollyMiddle: flavour.middle,
@@ -65,19 +60,17 @@ const createNewLolly = () => {
         }
       })
       console.log(`Data Document Created in faunaDB Sucessfully!`)
-      alert("Data Document Created in faunaDB Sucessfully!")
-      console.log('result', result)
-      // navigate(`showLolly?${result.data.makeLolly.lollyPath}`);
-      // navigate(`/showLolly/`, { state: { lolly: result.data.makeLolly }, replace: true })
-      recipientNameRef.current.value = ""
-      messageRef.current.value = ""
-      senderRef.current.value = ""
+      // console.log('result', data)
+      recipientNameRef.current.value = "";
+      messageRef.current.value = "";
+      senderRef.current.value = "";
+      navigate(`/lollies/${data?.makeLolly?.lollyPath}`)
     } else {
-      console.log(`Please Fill the form completely`)
       alert("Please Fill the form completely")
     }
   }
-  // console.log('recipientNameRef', recipientNameRef?.current?.value)
+  
+  // J S X   R E T U R N
   return (
     <div className="container">
       <Header />
@@ -149,7 +142,7 @@ const createNewLolly = () => {
                 id="senderName"
                 ref={senderRef}
                 required
-                placeholder="from your fried..."
+                placeholder="from your friend..."
               />
             </label>
 
