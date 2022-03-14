@@ -24,7 +24,7 @@ export const query = gql`
 interface DynamicLollyProps {
   // coming from gatsby-node.js Build time page
   pageContext: {
-    lollyPath: string | null;
+    lollyPath?: string;
   };
   // run time page
   lollyPath?: string;
@@ -55,7 +55,7 @@ const DynamicLolly = (props: DynamicLollyProps) => {
   if (error) {
     console.log('error', error.message)
     navigate("/404")
-    return null
+    return error.message
   }
   if (loading) return <h3 className="loading" >Please Wait..</h3>
   return (
