@@ -2,7 +2,7 @@ import React from "react"
 import DynamicLolly from "../../templates/dynamic_Lolly"
 import { Router } from "@reach/router"
 
-const Lollies = props => {
+const Lollies = () => {
   return (
     <div className="lollies">
       <Router>
