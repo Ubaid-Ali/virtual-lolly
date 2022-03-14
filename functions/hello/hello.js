@@ -57,6 +57,7 @@ const resolvers = {
         return lollies
       } catch (error) {
         console.log("Error: [%s] %s: %s, error while get all lollies ", error)
+        return error.message
       }
     },
     // GET LOLLY BY PATH
@@ -67,22 +68,31 @@ const resolvers = {
         )
         return result.data
       } catch (error) {
-        console.log("error while get Lolly by getLollyUsingPath", error.message)
+        console.log("error==>", error)
+        console.log(
+          "error while get Lolly by getLollyUsingPath error.message==>",
+          error.message
+        )
+        return error
       }
-
-      return error.message
     },
     hello: () => "Hello, world!",
   },
   Mutation: {
     makeLolly: async (_, args) => {
-      const id = shortId.generate()
-      args.lollyPath = id
-      // Upload lolly data to FaunaDB
-      const result = await client.query(
-        q.Create(q.Collection("lolly-collection"), { data: args })
-      )
-      return result.data
+      try {
+        const id = shortId.generate()
+        args.lollyPath = id
+        console.log("args", args)
+        // Upload lolly data to FaunaDB
+        const result = await client.query(
+          q.Create(q.Collection("lolly-collection"), { data: args })
+        )
+        return result.data
+      } catch (error) {
+        console.log("===> error when creating new lolly <===", error)
+        return error
+      }
     },
   },
 }
