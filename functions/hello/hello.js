@@ -62,6 +62,7 @@ const resolvers = {
     },
     // GET LOLLY BY PATH
     getLollyUsingPath: async (_, { lollyPath }) => {
+      console.log("lollyPath ===> ", lollyPath)
       try {
         const result = await client.query(
           q.Get(q.Match(q.Index("lolly_path_index"), lollyPath))
