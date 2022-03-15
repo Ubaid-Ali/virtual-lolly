@@ -83,7 +83,6 @@ const resolvers = {
       try {
         const id = shortId.generate()
         args.lollyPath = id
-        console.log("args", args)
         // Upload lolly data to FaunaDB
         const result = await client.query(
           q.Create(q.Collection("lolly-collection"), { data: args })
