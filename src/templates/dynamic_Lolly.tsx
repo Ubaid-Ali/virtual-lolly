@@ -38,10 +38,12 @@ const DynamicLolly = (props: DynamicLollyProps) => {
     console.log('Client side Dynamic Page')
   }
 
-  const _lollyPath = props?.pageContext?.lollyPath || props.lollyPath;
+  const _lollyPath = props?.pageContext?.lollyPath || props?.lollyPath;
   const { data, loading, error } = useQuery(query, {
     variables: { lollyPath: _lollyPath },
   })
+
+  console.log('_lollyPath', _lollyPath)
 
   if (loading) return <h3 className="loading" >Loading Please Wait..</h3>
   if (error) {
