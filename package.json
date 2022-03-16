@@ -24,7 +24,7 @@
     "gatsby-link": "^4.5.0",
     "gatsby-plugin-google-fonts": "^1.0.1",
     "gatsby-react-router-scroll": "^5.5.0",
-    "gatsby-source-graphql": "^4.7.0",
+    "gatsby-source-graphql": "^4.9.1",
     "graphql": "^15.8.0",
     "graphql-tag": "^2.11.0",
     "react": "^17.0.1",
