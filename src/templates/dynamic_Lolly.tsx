@@ -27,23 +27,21 @@ interface DynamicLollyProps {
     lollyPath?: string;
   };
   // client side page
-  lollyPath?: string;
+  // lollyPath?: string;
 }
 
 const DynamicLolly = (props: DynamicLollyProps) => {
 
-  if (props.pageContext?.lollyPath) {
-    console.log('Getting Build time Page, Static Page')
-  } else if (props.lollyPath) {
-    console.log('Creating Client side Dynamic Page')
-  }
+  // if (props.pageContext?.lollyPath) {
+  //   console.log('Getting Build time Page, Static Page')
+  // } else if (props.lollyPath) {
+  //   console.log('Creating Client side Dynamic Page')
+  // }
+  // const _lollyPath = props?.pageContext?.lollyPath || props?.lollyPath;
 
-  const _lollyPath = props?.pageContext?.lollyPath || props?.lollyPath;
   const { data, loading, error } = useQuery(query, {
-    variables: { lollyPath: _lollyPath },
+    variables: { lollyPath: props?.pageContext?.lollyPath },
   })
-
-  console.log('_lollyPath', _lollyPath)
 
   if (loading) return <h3 className="loading" >Loading Please Wait..</h3>
   if (error) {
@@ -76,7 +74,7 @@ const DynamicLolly = (props: DynamicLollyProps) => {
             <p className="created-top-text">
               Your lolly is freezing. Share it with this link:
             </p>
-            <p className="created-link">https://virtual-lolly-fullstack.netlify.app/lollies/{_lollyPath}</p>
+            <p className="created-link">https://virtual-lolly-fullstack.netlify.app/lollies/{props?.pageContext?.lollyPath}</p>
             <div className="showLolly-created-details">
               <span className="name">{recipientName}</span>
               <span>{message}</span>
