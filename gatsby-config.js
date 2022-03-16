@@ -7,8 +7,7 @@ module.exports = {
         typeName: "Lolly",
         fieldName: "AllLollies",
         url: `${process.env.URL}/.netlify/functions/hello`,
-        // url:`${process.env.URL}/.netlify/functions/makeLolly`,
-        refetchInterval: 60 // Refresh every 60 seconds for new data
+        // refetchInterval: 60 // Refresh every 60 seconds for new data
       }
     },
     {
