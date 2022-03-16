@@ -26,16 +26,16 @@ interface DynamicLollyProps {
   pageContext?: {
     lollyPath?: string;
   };
-  // run time page
+  // client side page
   lollyPath?: string;
 }
 
 const DynamicLolly = (props: DynamicLollyProps) => {
 
   if (props.pageContext?.lollyPath) {
-    console.log('Build time Page, Static Page')
+    console.log('Getting Build time Page, Static Page')
   } else if (props.lollyPath) {
-    console.log('Client side Dynamic Page')
+    console.log('Creating Client side Dynamic Page')
   }
 
   const _lollyPath = props?.pageContext?.lollyPath || props?.lollyPath;
@@ -47,7 +47,7 @@ const DynamicLolly = (props: DynamicLollyProps) => {
 
   if (loading) return <h3 className="loading" >Loading Please Wait..</h3>
   if (error) {
-    console.log('error', error.message)
+    console.log('error.message', error.message)
     navigate("/404")
     return <h3>{error.message}</h3>
   }
