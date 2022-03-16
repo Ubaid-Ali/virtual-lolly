@@ -6,7 +6,7 @@ const Lollies = () => {
   return (
     <div className="lollies">
       <Router>
-        <DynamicLolly path="/lollies/*lollyPath" />
+        <DynamicLolly path="/lollies/:lollyPath" />
       </Router>
     </div>
   )
